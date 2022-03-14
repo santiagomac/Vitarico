@@ -1,8 +1,10 @@
 package com.example.Vitarico.domain.services.impl;
 
 import com.example.Vitarico.domain.entities.Customer;
+import com.example.Vitarico.domain.models.customer.CustomerDto;
 import com.example.Vitarico.domain.repository.CustomerRepository;
 import com.example.Vitarico.domain.services.interfaces.CustomerService;
+import com.example.Vitarico.infraestructure.utility.CustomerMapper;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer saveCustomer(Customer customer) {
+    public Customer saveCustomer(CustomerDto customerDto) {
+        Customer customer = CustomerMapper.toEntity(customerDto);
         return this.customerRepository.save(customer);
     }
 }

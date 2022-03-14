@@ -1,6 +1,7 @@
 package com.example.Vitarico.controller;
 
 import com.example.Vitarico.domain.entities.Customer;
+import com.example.Vitarico.domain.models.customer.CustomerDto;
 import com.example.Vitarico.domain.services.interfaces.CustomerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +25,7 @@ public class CustomerController {
     }
 
     @PostMapping("/save")
-    public Customer saveCustomer(@RequestBody Customer customerToSave){
-        return this.customerService.saveCustomer(customerToSave);
+    public Customer saveCustomer(@RequestBody CustomerDto customerDto){
+        return this.customerService.saveCustomer(customerDto);
     }
 }
