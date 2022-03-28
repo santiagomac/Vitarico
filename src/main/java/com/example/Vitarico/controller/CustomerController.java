@@ -3,6 +3,11 @@ package com.example.Vitarico.controller;
 import com.example.Vitarico.domain.entities.Customer;
 import com.example.Vitarico.domain.models.customer.CustomerDto;
 import com.example.Vitarico.domain.services.interfaces.CustomerService;
+import com.sun.net.httpserver.HttpPrincipal;
+import java.net.URI;
+import java.net.http.HttpResponse;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,27 +23,31 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<Customer> getCustomers(){
-        return this.customerService.getAllCustomers();
+    public ResponseEntity<List<Customer>> getCustomers() {
+        return ResponseEntity.ok(this.customerService.getAllCustomers());
     }
 
     @GetMapping("/{id}")
-    public Customer getCustomer(@PathVariable Long id){
-        return this.customerService.getCustomer(id);
+    public ResponseEntity<Customer> getCustomer(@PathVariable Long id) {
+        return ResponseEntity.ok(this.customerService.getCustomer(id));
     }
 
     @PostMapping("/save")
-    public Customer saveCustomer(@RequestBody CustomerDto customerDto){
-        return this.customerService.saveCustomer(customerDto);
+    public ResponseEntity<Customer> saveCustomer(@RequestBody CustomerDto customerDto) {
+        return ResponseEntity.created(URI.create("/api/customer"))
+            .body(this.customerService.saveCustomer(customerDto));
     }
 
-    @PutMapping("/update/{id}")
-    public Customer updateCustomer(@PathVariable Long id, @RequestBody CustomerDto customerDto){
-        return this.customerService.updateCustomer(id, customerDto);
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<?> updateCustomer(@PathVariable Long id, @RequestBody CustomerDto customerDto) {
+        this.customerService.updateCustomer(id, customerDto);
+        return ResponseEntity.noContent()
+            .build();
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCustomer(@PathVariable Long id){
+    public ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
         this.customerService.deleteCustomer(id);
+        return ResponseEntity.noContent().build();
     }
 }
