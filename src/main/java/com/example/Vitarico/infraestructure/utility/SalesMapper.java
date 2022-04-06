@@ -9,7 +9,15 @@ public class SalesMapper {
         return Sales.builder()
             .date(salesDto.getDate())
             .description(salesDto.getDescription())
-            .customer_id(salesDto.getCustomerId())
+            .customerId(salesDto.getCustomerId())
             .build();
+    }
+
+    public static SalesDto toDto(Sales sale){
+        return SalesDto.builder()
+                .customerId(sale.getCustomerId())
+                .description(sale.getDescription())
+                .date(sale.getDate())
+                .build();
     }
 }

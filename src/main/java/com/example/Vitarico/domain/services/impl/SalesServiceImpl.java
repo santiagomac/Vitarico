@@ -5,8 +5,11 @@ import com.example.Vitarico.domain.models.sales.SalesDto;
 import com.example.Vitarico.domain.repository.SalesRepository;
 import com.example.Vitarico.domain.services.interfaces.SalesService;
 import com.example.Vitarico.infraestructure.utility.SalesMapper;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SalesServiceImpl implements SalesService {
@@ -18,17 +21,35 @@ public class SalesServiceImpl implements SalesService {
     }
 
     @Override
-    public Sales getSaleById(Long id) {
+    public List<SalesDto> getSales() {
+        List<Sales> sales = this.salesRepository.findAll();
+        return sales.stream().map(SalesMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public SalesDto getSaleById(Long id) {
         Optional<Sales> sale = this.salesRepository.findById(id);
         if(sale.isEmpty()){
             throw new RuntimeException("No existe la venta");
         }
-        return sale.get();
+        return SalesMapper.toDto(sale.get());
     }
 
     @Override
-    public Sales saveSales(SalesDto salesDto) {
+    public void saveSale(SalesDto salesDto) {
         Sales sales = SalesMapper.toEntity(salesDto);
-        return this.salesRepository.save(sales);
+        this.salesRepository.save(sales);
+    }
+
+    @Override
+    public void updateSale(SalesDto salesDto) {
+        Sales sales = SalesMapper.toEntity(salesDto);
+        this.salesRepository.save(sales);
+    }
+
+    @Override
+    public void deleteSale(Long id) {
+        this.salesRepository.deleteById(id);
     }
 }

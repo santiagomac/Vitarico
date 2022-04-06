@@ -3,17 +3,15 @@ package com.example.Vitarico.controller;
 import com.example.Vitarico.domain.entities.Customer;
 import com.example.Vitarico.domain.models.customer.CustomerDto;
 import com.example.Vitarico.domain.services.interfaces.CustomerService;
-import com.sun.net.httpserver.HttpPrincipal;
-import java.net.URI;
-import java.net.http.HttpResponse;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class CustomerController {
 
     private final CustomerService customerService;

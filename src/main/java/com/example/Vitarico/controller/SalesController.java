@@ -1,15 +1,10 @@
 package com.example.Vitarico.controller;
 
-import com.example.Vitarico.domain.entities.Sales;
 import com.example.Vitarico.domain.models.sales.SalesDto;
 import com.example.Vitarico.domain.services.interfaces.SalesService;
-import java.time.LocalDateTime;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/sales")
@@ -22,17 +17,28 @@ public class SalesController {
     }
 
     @GetMapping
-    public void getSales(){
-        System.out.println(LocalDateTime.now());
+    public List<SalesDto> getSales() {
+        return this.salesService.getSales();
     }
 
     @GetMapping("/{id}")
-    public Sales getSaleById(@PathVariable Long id){
+    public SalesDto getSaleById(@PathVariable Long id) {
         return this.salesService.getSaleById(id);
     }
 
     @PostMapping("/save")
-    public Sales createSale(@RequestBody SalesDto salesDto){
-        return this.salesService.saveSales(salesDto);
+    public void createSale(@RequestBody SalesDto salesDto) {
+        this.salesService.saveSale(salesDto);
+    }
+
+    @PutMapping("/update")
+    public void updateSale(@RequestBody SalesDto salesDto) {
+        this.salesService.updateSale(salesDto);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteSale(@PathVariable Long id) {
+        this.salesService.deleteSale(id);
     }
 }
+

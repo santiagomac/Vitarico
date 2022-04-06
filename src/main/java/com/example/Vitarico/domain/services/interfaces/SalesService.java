@@ -1,9 +1,13 @@
 package com.example.Vitarico.domain.services.interfaces;
 
-import com.example.Vitarico.domain.entities.Sales;
 import com.example.Vitarico.domain.models.sales.SalesDto;
 
+import java.util.List;
+
 public interface SalesService {
-    Sales getSaleById(Long id);
-    Sales saveSales(SalesDto salesDto);
+    List<SalesDto> getSales();
+    SalesDto getSaleById(Long id);
+    void saveSale(SalesDto salesDto);
+    void updateSale(SalesDto salesDto);
+    void deleteSale(Long id);
 }
