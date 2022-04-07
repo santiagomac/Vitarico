@@ -2,9 +2,13 @@ package com.example.Vitarico.infraestructure.utility;
 
 
 import com.example.Vitarico.domain.entities.Customer;
-import com.example.Vitarico.domain.models.customer.CustomerDto;
+import com.example.Vitarico.domain.dto.CustomerDto;
 
 public class CustomerMapper {
+
+    private CustomerMapper(){
+        throw new IllegalStateException("Utility class");
+    }
 
     public static Customer toEntity(CustomerDto customerDto) {
         return Customer.builder()

@@ -2,7 +2,7 @@ package com.example.Vitarico.domain.services.impl;
 
 import com.example.Vitarico.domain.entities.Customer;
 import com.example.Vitarico.domain.enums.ExceptionResponse;
-import com.example.Vitarico.domain.models.customer.CustomerDto;
+import com.example.Vitarico.domain.dto.CustomerDto;
 import com.example.Vitarico.domain.repository.CustomerRepository;
 import com.example.Vitarico.domain.services.interfaces.CustomerService;
 import com.example.Vitarico.exception.CustomerException;
@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomer(Long id) {
         Optional<Customer> customer = this.customerRepository.findById(id);
         if (customer.isEmpty()) {
-            throw new RuntimeException("El cliente con el id seleccionado no existe");
+            throw new CustomerException(String.format(ExceptionResponse.NOT_FOUND.getMessage(), "cliente", id));
         }
         return customer.get();
     }
@@ -42,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = CustomerMapper.toEntity(customerDto);
         try {
             return this.customerRepository.save(customer);
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("Error al guardar el cliente");
             throw new CustomerException(ExceptionResponse.SAVE_ERROR.getMessage());
         }
@@ -52,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void updateCustomer(Long id, CustomerDto customerDto) {
         Optional<Customer> customerToUpdate = this.customerRepository.findById(id);
         if (customerToUpdate.isEmpty()) {
-            throw new CustomerException(String.format(ExceptionResponse.NOT_FOUND.getMessage(), id));
+            throw new CustomerException(String.format(ExceptionResponse.NOT_FOUND.getMessage(), "cliente", id));
         }
 
         Customer customer = Customer.builder()

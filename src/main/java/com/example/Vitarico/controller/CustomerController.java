@@ -1,7 +1,7 @@
 package com.example.Vitarico.controller;
 
 import com.example.Vitarico.domain.entities.Customer;
-import com.example.Vitarico.domain.models.customer.CustomerDto;
+import com.example.Vitarico.domain.dto.CustomerDto;
 import com.example.Vitarico.domain.services.interfaces.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,14 +37,14 @@ public class CustomerController {
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<?> updateCustomer(@PathVariable Long id, @RequestBody CustomerDto customerDto) {
+    public ResponseEntity<Void> updateCustomer(@PathVariable Long id, @RequestBody CustomerDto customerDto) {
         this.customerService.updateCustomer(id, customerDto);
         return ResponseEntity.noContent()
             .build();
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
         this.customerService.deleteCustomer(id);
         return ResponseEntity.noContent().build();
     }

@@ -1,4 +1,4 @@
-package com.example.Vitarico.domain.models.customer;
+package com.example.Vitarico.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
