@@ -1,6 +1,6 @@
 package com.example.Vitarico.controller;
 
-import com.example.Vitarico.domain.models.sales.SalesDto;
+import com.example.Vitarico.domain.dto.SalesDto;
 import com.example.Vitarico.domain.services.interfaces.SalesService;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
 package com.example.Vitarico.infraestructure.utility;
 
 import com.example.Vitarico.domain.entities.Sales;
-import com.example.Vitarico.domain.models.sales.SalesDto;
+import com.example.Vitarico.domain.dto.SalesDto;
 
 public class SalesMapper {
 

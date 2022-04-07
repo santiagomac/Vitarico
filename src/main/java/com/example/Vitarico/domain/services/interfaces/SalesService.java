@@ -1,6 +1,6 @@
 package com.example.Vitarico.domain.services.interfaces;
 
-import com.example.Vitarico.domain.models.sales.SalesDto;
+import com.example.Vitarico.domain.dto.SalesDto;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.example.Vitarico.domain.services.impl;
 
 import com.example.Vitarico.domain.entities.Sales;
-import com.example.Vitarico.domain.models.sales.SalesDto;
+import com.example.Vitarico.domain.dto.SalesDto;
 import com.example.Vitarico.domain.repository.SalesRepository;
 import com.example.Vitarico.domain.services.interfaces.SalesService;
 import com.example.Vitarico.infraestructure.utility.SalesMapper;
