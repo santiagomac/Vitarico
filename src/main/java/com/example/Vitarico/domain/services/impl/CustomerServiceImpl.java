@@ -5,7 +5,7 @@ import com.example.Vitarico.domain.enums.ExceptionResponse;
 import com.example.Vitarico.domain.dto.CustomerDto;
 import com.example.Vitarico.domain.repository.CustomerRepository;
 import com.example.Vitarico.domain.services.interfaces.CustomerService;
-import com.example.Vitarico.exception.CustomerException;
+import com.example.Vitarico.exception.personalized.CustomerException;
 import com.example.Vitarico.infraestructure.utility.CustomerMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

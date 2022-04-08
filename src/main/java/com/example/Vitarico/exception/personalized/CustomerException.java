@@ -1,4 +1,4 @@
-package com.example.Vitarico.exception;
+package com.example.Vitarico.exception.personalized;
 
 public class CustomerException extends RuntimeException{
 
