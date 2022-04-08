@@ -1,9 +1,9 @@
 package com.example.Vitarico.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.Vitarico.domain.dto.ProductDto;
+import com.example.Vitarico.domain.services.interfaces.ProductService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -11,13 +11,37 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
     @GetMapping
-    public List<ProductDto> getProducts() {
-        return this.productService.getProducts();
+    public ResponseEntity<List<ProductDto>> getProducts() {
+        return ResponseEntity.ok(this.productService.getProducts());
     }
 
     @GetMapping("/{id}")
-    public ProductDto getById(@PathVariable Long id) {
-        return this.productService.getProductById();
+    public ResponseEntity<ProductDto> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(this.productService.getProductById(id));
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<Void> save(@RequestBody ProductDto productDto) {
+        this.productService.saveProduct(productDto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> update(@RequestBody ProductDto productDto, @PathVariable Long id) {
+        this.productService.updateProduct(id, productDto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        this.productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -6,8 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ExceptionResponse {
-    NOT_FOUND("El cliente con el id %s no existe"),
-    SAVE_ERROR("Ha ocurrido un error al intentar guardar el cliente");
+    NOT_FOUND("El %s con el id %s no existe"),
+    SAVE_ERROR("Ha ocurrido un error al intentar guardar el registro");
 
-    private String message;
+    private final String message;
 }
