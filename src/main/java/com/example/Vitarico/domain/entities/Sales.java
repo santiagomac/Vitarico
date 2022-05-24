@@ -32,6 +32,9 @@ public class Sales {
     @Column(name = "customer_id")
     private Long customerId;
 
+    @Column(name = "total")
+    private Double total;
+
     @ManyToOne()
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false)

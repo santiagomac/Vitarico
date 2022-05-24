@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -16,6 +17,6 @@ public class SalesDto {
     private Long id;
     private LocalDateTime date;
     private String description;
-    private Long productId;
     private Long customerId;
+    private List<SalesDetailDto> salesDetailDto;
 }
